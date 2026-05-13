@@ -2,12 +2,34 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title" : "Energy Consumption Rate",
   "data" : {
-    "url": "./data/energy_use.csv",
+    "url": "chart_1/data/energy_use.csv",
     "format" : {"type": "csv"}
   },
   "transform" : [
     {
-      "filter": "datum['\uFEFFCountry Name'] == 'Australia'"    
+      "filter": {"field": "Country Code", "oneOf": ["AUS", "USA", "GBR", "CHN", "MYS", "CAN", "JPN", "KOR", "FRA", "IND"]} 
+    },
+    {
+      "lookup": "Country Code",
+      "from": {
+        "data" : {
+          "values" : [
+            {"code" : "AUS", "name":"Australia"},
+            {"code" : "USA", "name":"United States"},
+            {"code" : "GBR", "name":"United Kingdom"},
+            {"code" : "CHN", "name":"China"},
+            {"code" : "MYS", "name":"Malaysia"},
+            {"code" : "CAN", "name":"Canada"},
+            {"code" : "JPN", "name":"Japan"},
+            {"code" : "KOR", "name":"Republic of Korea"},
+            {"code" : "FRA", "name":"France"},
+            {"code" : "IND", "name":"India"}
+          ]
+        },
+        "key" : "code",
+        "fields": ["name"]
+      },
+      "as" : "Country"
     },
     {
       "fold" : [
@@ -21,6 +43,7 @@
       "as" : "Energy Use"
     }
   ],
+  
   "mark": {"type": "line", "point" : true},
   "encoding": {
     "x" : {
@@ -34,7 +57,7 @@
       "title" : "Energy use (kg of oil equivalent per capita)"
     },
     "color" : {
-      "field": "\uFEFFCountry Name",
+      "field": "Country",
       "type" : "nominal", 
       "title" : "Country"
     } 
