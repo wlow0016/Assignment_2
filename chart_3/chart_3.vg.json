@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title" : "Renewable Energy Consumption",
+  "title" : "Fossil Fuel VS Renewable",
   "data" : {
-    "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_2/data/renewable_energy.csv",
+    "url": "chart_2/data/renewable_energy.csv",
     "format" : {"type": "csv"}
   },
   "transform" : [
