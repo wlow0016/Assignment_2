@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title" : "Renewable Energy Consumption",
+  "data" : {
+    "url": "chart_2/data/renewable_energy.csv",
+    "format" : {"type": "csv"}
+  },
+  "transform" : [
+    {
+      "filter": {"field": "Country Code", "oneOf": ["AUS", "USA", "GBR", "CHN", "MYS", "CAN", "JPN", "KOR", "FRA", "IND"]} 
+    },
+    {
+      "lookup": "Country Code",
+      "from": {
+        "data" : {
+          "values" : [
+            {"code" : "AUS", "name":"Australia"},
+            {"code" : "USA", "name":"United States"},
+            {"code" : "GBR", "name":"United Kingdom"},
+            {"code" : "CHN", "name":"China"},
+            {"code" : "MYS", "name":"Malaysia"},
+            {"code" : "CAN", "name":"Canada"},
+            {"code" : "JPN", "name":"Japan"},
+            {"code" : "KOR", "name":"Republic of Korea"},
+            {"code" : "FRA", "name":"France"},
+            {"code" : "IND", "name":"India"}
+          ]
+        },
+        "key" : "code",
+        "fields": ["name"]
+      },
+      "as" : "Country"
+    },
+    {
+      "fold" : [
+        "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017",
+        "2018", "2019", "2020", "2021", "2022", "2023"
+      ],
+      "as" : ["Year", "Renewable Energy Use"]
+    },
+    {
+      "calculate": "toNumber(datum['Renewable Energy Use'])",
+      "as" : "Renewable Energy Use"
+    }
+  ],
+  
+  "mark": {"type": "line", "point" : true},
+  "encoding": {
+    "x" : {
+      "field" : "Year",
+      "type" : "nominal",
+      "title": "Year"
+    },
+    "y": {
+      "field": "Renewable Energy Use",
+      "type": "quantitative",
+      "title" : "Renewable energy consumption (%)"
+    },
+    "color" : {
+      "field": "Country",
+      "type" : "nominal", 
+      "title" : "Country"
+    } 
+  }
+}
