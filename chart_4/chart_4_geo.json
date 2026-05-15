@@ -1,0 +1,21 @@
+{
+  "data": {
+    "values": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "id": "01", 
+          "properties": { "name": "District A" },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [[101.6, 3.1], [101.7, 3.1], [101.7, 3.2], [101.6, 3.2], [101.6, 3.1]]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "mark": "geoshape"
+}
