@@ -7,7 +7,7 @@
   },
   "transform" : [
     {
-      "filter": {"field": "Country Code", "oneOf": ["AUS", "USA", "GBR", "CHN", "MYS", "CAN", "JPN", "KOR", "FRA", "IND"]} 
+      "filter": {"field": "Country Code", "oneOf": ["AUS", "USA", "GBR", "CHN", "MYS", "JPN"]} 
     },
     {
       "lookup": "Country Code",
@@ -19,11 +19,7 @@
             {"code" : "GBR", "name":"United Kingdom"},
             {"code" : "CHN", "name":"China"},
             {"code" : "MYS", "name":"Malaysia"},
-            {"code" : "CAN", "name":"Canada"},
-            {"code" : "JPN", "name":"Japan"},
-            {"code" : "KOR", "name":"Republic of Korea"},
-            {"code" : "FRA", "name":"France"},
-            {"code" : "IND", "name":"India"}
+            {"code" : "JPN", "name":"Japan"}
           ]
         },
         "key" : "code",
@@ -34,7 +30,7 @@
     {
       "fold" : [
         "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017",
-        "2018", "2019", "2020", "2021"
+        "2018", "2019", "2020", "2020"
       ],
       "as" : ["Year", "Energy Use"]
     },
@@ -44,7 +40,7 @@
     }
   ],
   
-  "mark": {"type": "line", "point" : true},
+  "mark": {"type": "line"},
   "encoding": {
     "x" : {
       "field" : "Year",
