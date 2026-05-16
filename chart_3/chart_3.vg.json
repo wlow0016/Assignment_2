@@ -1,65 +1,68 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title" : "Fossil Fuel VS Renewable",
-  "data" : {
-    "url": "chart_2/data/renewable_energy.csv",
-    "format" : {"type": "csv"}
-  },
-  "transform" : [
+  "layer" : [
     {
-      "filter": {"field": "Country Code", "oneOf": ["AUS", "USA", "GBR", "CHN", "MYS", "CAN", "JPN", "KOR", "FRA", "IND"]} 
+    "data" : {
+        "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_3/data/global-fossil-fuel-consumption.csv",
+        "format" : {"type": "csv"}
     },
-    {
-      "lookup": "Country Code",
-      "from": {
-        "data" : {
-          "values" : [
-            {"code" : "AUS", "name":"Australia"},
-            {"code" : "USA", "name":"United States"},
-            {"code" : "GBR", "name":"United Kingdom"},
-            {"code" : "CHN", "name":"China"},
-            {"code" : "MYS", "name":"Malaysia"},
-            {"code" : "CAN", "name":"Canada"},
-            {"code" : "JPN", "name":"Japan"},
-            {"code" : "KOR", "name":"Republic of Korea"},
-            {"code" : "FRA", "name":"France"},
-            {"code" : "IND", "name":"India"}
-          ]
+    "transform" : [
+        {"filter" : "datum.Year >= 2010 && datum.Year <= 2020"},
+        {
+            "calculate": "toNumber(datum.Gas) + toNumber(datum.Oil) + toNumber(datum.Coal)",
+            "as": "Value"
         },
-        "key" : "code",
-        "fields": ["name"]
-      },
-      "as" : "Country"
-    },
-    {
-      "fold" : [
-        "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017",
-        "2018", "2019", "2020", "2021"
-      ],
-      "as" : ["Year", "Renewable Energy Use"]
-    },
-    {
-      "calculate": "toNumber(datum['Renewable Energy Use'])",
-      "as" : "Renewable Energy Use"
+        {"calculate":"'Fossil Fuel'", "as": "Energy Type"}
+    ],
+    "mark": {"type":"area", "opacity":0.7},
+    "encoding": {
+        "x" : {
+        "field" : "Year",
+        "type" : "nominal"
+        },
+        "y": {
+        "field": "Value",
+        "type": "quantitative",
+        "title" : "Energy (TwH)"
+        },
+        "color" : {
+        "field": "Energy Type",
+        "type" : "nominal"
+        }
     }
-  ],
-  
-  "mark": {"type": "line", "point" : true},
-  "encoding": {
-    "x" : {
-      "field" : "Year",
-      "type" : "nominal",
-      "title": "Year"
     },
-    "y": {
-      "field": "Renewable Energy Use",
-      "type": "quantitative",
-      "title" : "Renewable energy consumption (%)"
+    {
+    "data":{
+        "url" : "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_3/data/renewable-energy-consumption.csv",
+        "format" : {"type": "csv"}
     },
-    "color" : {
-      "field": "Country",
-      "type" : "nominal", 
-      "title" : "Country"
-    } 
-  }
+
+    "transform" : 
+    [
+        {"filter" : "datum.Year >= 2010 && datum.Year <= 2020"},
+        {
+            "calculate": "toNumber(datum['Other renewables']) + toNumber(datum.Solar) + toNumber(datum['Modern biofuels']) + toNumber(datum.Wind) + toNumber(datum.Hydropower) + toNumber(datum['Traditional biomass'])",
+            "as": "Value"
+        },
+        {"calculate":"'Renewable'", "as": "Energy Type"}
+        ],
+        "mark": {"type": "area", "opacity":0.7},
+        "encoding": {
+            "x" : {
+            "field" : "Year",
+            "type" : "nominal"
+            },
+            "y": {
+            "field": "Value",
+            "type": "quantitative",
+            "title" : "Energy (Twh)"
+            },
+            "color" : {
+            "field": "Energy Type",
+            "type" : "nominal"
+            } 
+            }
+        }    
+    ]
 }

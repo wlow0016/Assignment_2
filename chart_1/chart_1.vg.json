@@ -7,7 +7,7 @@
   },
   "transform" : [
     {
-      "filter": {"field": "Country Code", "oneOf": ["AUS", "USA", "GBR", "CHN", "MYS", "JPN"]} 
+      "filter": {"field": "Country Code", "oneOf": ["AUS", "USA", "CHN", "MYS", "JPN"]} 
     },
     {
       "lookup": "Country Code",
@@ -16,7 +16,6 @@
           "values" : [
             {"code" : "AUS", "name":"Australia"},
             {"code" : "USA", "name":"United States"},
-            {"code" : "GBR", "name":"United Kingdom"},
             {"code" : "CHN", "name":"China"},
             {"code" : "MYS", "name":"Malaysia"},
             {"code" : "JPN", "name":"Japan"}
