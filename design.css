@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────── */
+:root {
+  --bg:          #0d1117;
+  --surface:     #161c26;
+  --border:      #222d3d;
+  --text:        #e8eaf0;
+  --muted:       #7a8599;
+  --accent:      #e8a838;
+  --accent-dim:  rgba(232, 168, 56, 0.12);
+  --green:       #4caf82;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Source Sans 3', 'Helvetica Neue', sans-serif;
+  --max-width:   1100px;
+  --radius:      6px;
+}
+
+/* ── Reset & Base ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── Page Header (first h1 becomes the hero title) ─────── */
+body > h1:first-of-type {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-align: center;
+  padding: 72px 24px 16px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+body > h1:first-of-type::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 4px;
+  background: var(--accent);
+  margin: 20px auto 0;
+  border-radius: 2px;
+}
+
+/* ── Section Headings (remaining h1s) ───────────────────── */
+body > h1:not(:first-of-type) {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 56px 24px 0;
+  position: relative;
+  padding-left: 28px;
+}
+
+body > h1:not(:first-of-type)::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-6px);
+  height: 70%;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* ── Chart Container Divs ───────────────────────────────── */
+body > div {
+  max-width: var(--max-width);
+  margin: 24px auto 0;
+  padding: 32px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+}
+
+body > div:hover {
+  border-color: var(--accent);
+}
+
+/* Vega/Vega-Lite canvases sit inside these divs */
+body > div canvas,
+body > div svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Subtle grid texture on page bg ────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * { position: relative; z-index: 1; }
+
+/* ── Bottom spacer ──────────────────────────────────────── */
+body > div:last-of-type {
+  margin-bottom: 72px;
+  width: 100%;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
