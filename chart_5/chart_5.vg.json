@@ -72,15 +72,23 @@
                     "field":"energy",
                     "type": "quantitative",
                     "title":"Energy Use (kg of oil equivalent per capita)",
-                    "scale":{"type": "log", "domain":[100,50000]},
-                    "axis" : {"tickCount": 5}
+                    "scale":{"type": "log", "domain":[1,50000]},
+                    "axis" : {
+                        "values":[0,100,1000,10000,50000],
+                        "tickCount": 5,
+                        "gridDash": [],
+                        "gridOpacity" : 1
+                }
                 },
                 "y":{
                     "field":"co2_val",
                     "type": "quantitative",
                     "title":"CO₂ Emissions (Mt)",
-                    "scale":{"type": "log", "domain":[1,50000]},
-                    "axis" : {"tickCount": 6}
+                    "scale":{"type": "log", "domain":[1,30000]},
+                    "axis" : {
+                        "values":[0,100,1000, 10000, 50000 ],
+                        "tickCount": 6
+                    }
                 },
                 "color":{
                     "field":"region",
