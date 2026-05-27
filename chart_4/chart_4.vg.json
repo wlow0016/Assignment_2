@@ -44,8 +44,8 @@
             "field": "2020",
             "type": "quantitative",
             "title": "Renewable Energy",
-            "scale": {"type": "quantize", "domain" : [0,100], "scheme" : "greens"},
-            "legend" : {"title": "Renewable Energy (%)", "orient": "bottom-left", "gradientLength": 200}
+            "scale": {"type": "linear", "domain" : [0,100], "scheme" : "pinkyellowgreen"},
+            "legend" : {"title": "Renewable Energy (%)", "type": "gradient", "orient": "bottom-left", "gradientLength": 200}
         },
         "tooltip": [
         {"field": "properties.NAME", "type": "nominal", "title": "Country"},

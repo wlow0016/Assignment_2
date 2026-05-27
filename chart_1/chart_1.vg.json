@@ -29,7 +29,7 @@
     {
       "fold" : [
         "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017",
-        "2018", "2019", "2020", "2020"
+        "2018", "2019", "2020"
       ],
       "as" : ["Year", "Energy Use"]
     },
@@ -54,7 +54,11 @@
     "color" : {
       "field": "Country",
       "type" : "nominal", 
-      "title" : "Country"
+      "title" : "Country",
+      "scale" : {
+        "domain": ["Australia", "United States", "China", "Malaysia", "Japan"],
+        "range": ["#1f77b4", "#ff7f0e", "#9467bd", "#008080", "#d62768"]
+      }
     } 
   }
 }
