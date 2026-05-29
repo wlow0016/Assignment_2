@@ -4,7 +4,7 @@
     "height": 600,
     "title": "Renewable Share vs CO₂ Emissions (2020)",
     "data": {
-        "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_5/data/renewable_energy.csv"
+        "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_5/data/renewabe_energy.csv"
     },
     "params": [
         {
@@ -62,7 +62,8 @@
         {"calculate": "toNumber(datum.co2)", "as" : "co2_val"},
         {"filter" : "datum.energy > 0 && datum.co2_val > 0"},
         {"filter" : "datum.energy > Energy_Use"},
-        {"filter" : "Region_selection == null || datum.region == Region_selection"}
+        {"filter" : "Region_selection == null || datum.region == Region_selection"},
+        {"filter": "datum['Country Code'] != 'ARB' && datum['Country Code'] != 'EAS' && datum['Country Code'] != 'ECS' && datum['Country Code'] != 'LCN' && datum['Country Code'] != 'MEA' && datum['Country Code'] != 'NAC' && datum['Country Code'] != 'SAS' && datum['Country Code'] != 'SSF' && datum['Country Code'] != 'WLD'"}
     ],
     "layer": [
         {
@@ -72,19 +73,21 @@
                     "field":"energy",
                     "type": "quantitative",
                     "title":"Renewable Energy Consumption (% of total)",
-                    "scale":{"type": "log", "domain":[1,100], "clamp":true},
+                    "scale":{"domain":[0,100]},
                     "axis" : {
-                        "grid": true
+                        "grid": true,
+                        "gridOpacity": 0.5
                 }
                 },
                 "y":{
                     "field":"co2_val",
                     "type": "quantitative",
                     "title":"CO₂ Emissions (Mt)",
-                    "scale":{"type": "log", "domain":[1,50000], "clamp":true},
+                    "scale":{"type":"log", "clamp":true, "domain":[1,50000]},
                     "axis" : {
-                        "values":[0,100,1000, 10000, 50000 ],
-                        "grid": true
+                        "values":[1,100,1000, 10000, 50000],
+                        "grid": true,
+                        "tickCount": 5
                     }
                 },
                 "color":{
@@ -125,8 +128,8 @@
                 "fontStyle":"italic"
             },
             "encoding": {
-                "x":{"field":"energy","type": "quantitative","scale":{"type": "log", "domain":[1,100]}},
-                "y":{"field":"co2_val", "type": "quantitative","scale" : {"type": "log", "domain":[1,50000]}},
+                "x":{"field":"energy","type": "quantitative","scale":{"domain":[0,100]}},
+                "y":{"field":"co2_val", "type": "quantitative","scale" : {"type":"log", "clamp":true, "domain":[1,50000]} },
                 "text":{"field":"Country Name", "type": "nominal"},
                 "color":{"value":"black"},
                 "opacity":{
