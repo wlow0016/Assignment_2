@@ -4,8 +4,57 @@
   "width": 800,
   "height": 400,
   "data": {
-        "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_7/ne_110m._asean_countriesjson.json",
-        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+        "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_8/data/share-energy-source-sub.csv",
+        "format": {"type": "csv"}
+  },
+  "params": [
+    {
+        "name": "zoom_y",
+        "value":1,
+        "bind":{"input": "range", "min" : 1, "max": 20, "step": 1, "name": "Zoom"}
+    }
+  ],
+  "transform": [
+    {
+        "filter": "datum.Entity == 'Malaysia'"
     },
-    "mark" : {"type":"geoshape", "fill":"#d3d3d3", "stroke": "white"}
+    {
+        "fold" : ["Oil", "Coal", "Solar", "Nuclear", "Hydropower","Wind", "Gas", "Other renewables"],
+        "as" : ["Energy source", "Energy share/consumption"]
+    },
+    {
+        "filter": "datum.Year >= 2010 && datum.Year <= 2020"
+    }
+  ],
+  "mark":"area",
+  "encoding": {
+    "x":{
+        "field": "Year",
+        "type": "nominal",
+        "title": "Year",
+        "axis": {"format": "d"}
+    },
+    "y":{
+        "field": "Energy share/consumption",
+        "type": "quantitative",
+        "title": "Energy Share (%)",
+        "scale": {
+            "domain" : [0, {"expr": "100/zoom_y"}],
+            "clamp":true
+        }
+    },
+    "color":{
+        "field":"Energy source",
+        "type": "nominal",
+        "title":"Energy Source",
+        "scale":{
+            "scheme":"accent"
+        }
+    },
+    "tooltip": [
+        {"field":"Year", "type": "nominal"},
+        {"field":"Energy source", "type": "nominal"},
+        {"field":"Energy share/consumption", "type": "quantitative", "title":"Energy Share (%)", "format":".2f"}
+    ]
+  }
 }
