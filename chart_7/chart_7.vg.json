@@ -1,0 +1,9 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 600,
+  "data" : {
+    "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_6/data/energy_use.csv",
+    "format" : {"type": "csv"}
+    }
+}
