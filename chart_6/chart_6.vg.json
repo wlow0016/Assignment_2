@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 600,
+  "data" : {
+    "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_6/data/energy_use.csv",
+    "format" : {"type": "csv"}
+    },
+    "transform": [
+        {
+            "lookup":"Country Code",
+            "from": {
+                "data": {
+                    "url":"https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_6/data/CO2.csv",
+                    "format": {"type" : "csv"}
+                },
+                "key" : "Country Code",
+                "fields" : ["2020"]
+            },
+            "as" : ["co2_2020"] 
+        },
+        {
+            "lookup":"Country Code",
+            "from": {
+                "data": {
+                    "url":"https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_6/data/renewabe_energy.csv",
+                    "format": {"type" : "csv"}
+                },
+                "key" : "Country Code",
+                "fields" : ["2020"]
+            },
+            "as" : ["renewable_energy_2020"] 
+        },
+        {
+            "lookup":"Country Code",
+            "from": {
+                "data": {
+                    "url":"https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_6/data/population(Data).csv",
+                    "format": {"type" : "csv"}
+                },
+                "key" : "Country Code",
+                "fields" : ["2020"]
+            },
+            "as" : ["population_2020"] 
+        },
+        {
+            "filter": "datum['2020'] > 0 && datum['co2_2020'] > 0 && datum['population_2020'] > 0"
+
+        }
+    ],
+    "mark":{
+        "type": "point",
+        "filled": true
+    },
+    "encoding": {
+        "x":{
+            "field" : "2020", 
+            "type": "quantitative",
+            "title": "Energy use (kg of oil equivalent per capita)",
+            "scale": {"type": "log", "domain": [100,17000], "clamp":true},
+            "axis": {
+                "values": [100,1000,5000,10000,20000]
+            }
+        },
+        "y":{
+            "field" : "co2_2020",
+            "title": "Carbon dioxide (C02) Emissions", 
+            "type": "quantitative",
+            "scale": {"type": "log", "domain":[1,50000], "clamp":true},
+            "axis":{
+                "values":[1,100,1000,10000,50000]
+            }
+        },
+        "size":{
+            "field":"population_2020", 
+            "title":"Population",
+            "type": "quantitative",
+            "scale":{"range":[60,1200]}
+        },
+        "color":{
+            "field":"renewable_energy_2020", 
+            "title":"Renewable Energy Consumption (%)", 
+            "type": "quantitative",
+            "scale": {"scheme":"magma"},
+            "legend" : {"title": "Renewable Energy (%)", "type": "gradient", "gradientLength": 200}
+        }
+    } 
+}
