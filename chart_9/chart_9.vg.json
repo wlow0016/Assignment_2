@@ -1,0 +1,47 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Global Map Renewable Energy Consumption",
+  "width": 800,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_9/data/renewabe_energy.csv",
+    "format": {"type": "csv"}
+        },
+    "transform":[
+        {
+            "filter": "datum['Country Code'] == 'MYS' || datum['Country Code'] == 'WLD'"
+        },
+        {
+            "fold": ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"],
+            "as" : ["Year", "Renewable %"]
+        },
+        {
+            "calculate": "+datum.Year", "as": "Year"
+        },
+        {
+            "calculate": "+datum['Renewable %']", "as": "Renewable %"
+        },
+        {
+            "calculate": "datum['Country Code'] == 'MYS' ? 'Malaysia' : 'World'",
+            "as": "Region"
+        }
+    ],
+    "mark": {"type": "line", "point": true},
+    "encoding": {
+        "x":{"field": "Year", "type": "quantitative", "axis":{"format": "d"}},
+        "y":{"field": "Renewable %", "type": "quantitative", "title":"Renewable Energy (% of total energy consumption)"},
+        "color":{
+            "field":"Region",
+            "type": "nominal",
+            "scale": {
+                "domain" : ["Malaysia", "World"],
+                "range" : ["#3c20a3", "#ff0000"]
+            }
+        },
+        "tooltip": [
+            {"field": "Year", "type": "nominal"},
+            {"field": "Region", "type": "nominal"},
+            {"field": "Renewable %", "type": "quantitative","title": "Renewable Share (%)", "format": ",.2f"}
+        ]
+    }
+}

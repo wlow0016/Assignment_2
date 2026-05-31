@@ -13,7 +13,7 @@
     "mark" : {"type":"geoshape", "fill":"#d3d3d3", "stroke": "white"}
         },
         {
-        "data": {
+    "data": {
         "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_7/ne_110m._asean_countriesjson.json",
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}  
         },
