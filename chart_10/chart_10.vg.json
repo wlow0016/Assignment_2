@@ -1,0 +1,79 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Malaysia Energy Efficiency Trend",
+    "width": 800,
+    "height": 600,
+    "data": {
+        "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_10/data/energy_use.csv",
+        "format": {"type": "csv"}
+    },
+    "transform": [
+        {"filter" : "datum['Country Code'] == 'MYS'"},
+        {
+            "fold": ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"],
+            "as" : ["Year", "Energy per Capita"]
+        },
+        {"calculate": "+datum.Year", "as": "Year"},
+        {"calculate": "+datum['Energy per Capita']", "as":"Energy per Capita"},
+        {
+            "lookup": "Year",
+            "from": {
+                "data": {
+                    "values": [
+                        {"Year": 2010, "CO2 Emissions": 215.5014},
+                        {"Year": 2011, "CO2 Emissions":218.2727},
+                        {"Year": 2012, "CO2 Emissions": 219.7969},
+                        {"Year": 2013, "CO2 Emissions": 237.1554},
+                        {"Year": 2014, "CO2 Emissions": 251.3897},
+                        {"Year": 2015, "CO2 Emissions":252.8595},
+                        {"Year": 2016, "CO2 Emissions":247.4841},
+                        {"Year": 2017, "CO2 Emissions":237.8324},
+                        {"Year": 2018, "CO2 Emissions":254.2848},
+                        {"Year": 2019, "CO2 Emissions": 255.1651},
+                        {"Year": 2020, "CO2 Emissions": 253.08}
+                    ]
+                },
+                "key": "Year",
+                "fields": ["CO2 Emissions"]
+            },
+            "as" : ["CO2 Emissions"]
+        },
+        {"calculate": "+datum['CO2 Emissions']", "as": "CO2 Emissions"},
+        {"calculate": "datum.Year == 2010 ? datum['Energy per Capita'] - 20 : datum.Year == 2011 ? datum['Energy per Capita'] + 15 : datum.Year == 2012 ? datum['Energy per Capita'] - 20 : datum.Year == 2013 ? datum['Energy per Capita'] - 15 : datum.Year == 2014 ? datum['Energy per Capita'] + 15 : datum.Year == 2015 ? datum['Energy per Capita'] - 15 : datum.Year == 2016 ? datum['Energy per Capita'] + 15 : datum.Year == 2017 ? datum['Energy per Capita'] - 10 : datum.Year == 2018 ? datum['Energy per Capita'] - 10 : datum.Year == 2019 ? datum['Energy per Capita'] + 15 : datum['Energy per Capita'] + 15",
+        "as": "textX"},
+        {"calculate": "datum.Year == 2010 ? datum['CO2 Emissions'] + 1 : datum.Year == 2011 ? datum['CO2 Emissions'] + 0.5 : datum.Year == 2012 ? datum['CO2 Emissions'] + 0.5 : datum.Year == 2013 ? datum['CO2 Emissions'] + 1 : datum.Year == 2014 ? datum['CO2 Emissions'] - 1 : datum.Year == 2015 ? datum['CO2 Emissions'] + 1 : datum.Year == 2016 ? datum['CO2 Emissions'] - 1 : datum.Year == 2017 ? datum['CO2 Emissions'] + 1 : datum.Year == 2018 ? datum['CO2 Emissions'] - 1.5 : datum.Year == 2019 ? datum['CO2 Emissions'] + 1.5 : datum['CO2 Emissions'] - 1.5", 
+        "as": "textY"}
+    ],
+    "layer":[
+        {
+        "mark": {"type": "point", "filled": true, "size":175, "color":"#3c20a3"},
+        "encoding": {
+            "x":{
+                "field" : "Energy per Capita",
+                "type" : "quantitative",
+                "title" : "Energy Use per Capita (kg of oil equivalent)",
+                "scale": {"domain":[2400, 3000]}
+            },
+            "y": {
+                "field": "CO2 Emissions",
+                "type" : "quantitative",
+                "title": "CO2 Emissions (Mt CO2e)",
+                "scale": {"domain":[200, 270]}
+            },
+            "tooltip": [
+                {"field": "Year", "type" : "ordinal"},
+                {"field": "Energy per Capita", "type" : "quantitative", "title":"Energy Use per Capita (kg of oil equivalent)", "format": ".2f"},
+                {"field": "CO2 Emissions", "type" : "quantitative", "title": "CO2 Emissions (Mt CO2e)", "format": ".2f"}
+            ]
+        }
+        },
+        {
+        "mark": {"type":"text", "fontSize": 11},
+        "encoding": {
+            "x" : {"field": "textX", "type" : "quantitative", "scale": {"domain":[2400, 3000]}}, 
+            "y" : {"field": "textY", "type" : "quantitative", "scale": {"domain":[200, 270]}},
+            "text": {"field": "Year", "type" : "nominal"}
+        }
+    }
+    ]
+}

@@ -1,6 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title" : "Renewable Energy Consumption",
+  "width" : 800,
+  "height" : 600,
   "data" : {
     "url": "https://raw.githubusercontent.com/wlow0016/Assignment_2/refs/heads/main/chart_2/data/renewable_energy.csv",
     "format" : {"type": "csv"}
@@ -54,7 +56,11 @@
     "color" : {
       "field": "Country",
       "type" : "nominal", 
-      "title" : "Country"
+      "title" : "Country",
+      "scale" : {
+        "domain": ["Australia", "United States", "China", "Malaysia", "Japan"],
+        "range": ["#d62728", "#ff7f0e", "#17BECF", "#9467bd", "#e377c2", "#3c20a3", "#8c564b"]
+      }
     } 
   }
 }

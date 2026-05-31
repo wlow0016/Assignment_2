@@ -1,58 +1,261 @@
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
 
-  <script src="chart_1/chart_1.js"></script>
-  <!--<script src="chart_2/chart_2.js"></script>-->
-  <script src="chart_3/chart_3.js"></script>
-  <script src="chart_4/chart_4.js"></script>
-  <script src="chart_5/chart_5.js"></script>
-  <script src="chart_6/chart_6.js"></script>
-  <script src="chart_7/chart_7.js"></script>
-  <script src="chart_8/chart_8.js"></script>
-  <script src="chart_9/chart_9.js"></script>
+    <script src="chart_1/chart_1.js"></script>
+    <script src="chart_2/chart_2.js"></script>
+    <script src="chart_3/chart_3.js"></script>
+    <script src="chart_4/chart_4.js"></script>
+    <script src="chart_5/chart_5.js"></script>
+    <script src="chart_6/chart_6.js"></script>
+    <script src="chart_7/chart_7.js"></script>
+    <script src="chart_8/chart_8.js"></script>
+    <script src="chart_9/chart_9.js"></script>
+    <script src="chart_10/chart_10.js"></script>
 
-  <!--<link rel="stylesheet", href="style.css">-->
+    <link rel="stylesheet", href="style.css">
 
-  <title>Are we shifting towards renewable energy sources?</title>
-</head>
+    <title>Are we shifting towards renewable energy sources?</title>
+  </head>
 
-<body>
-  <h1>Global Renewable Map</h1>
-  <div id="choropleth_map1"></div>
-  
-  <h1>Global Energy Dependence</h1>
-  <div id="line_chart1"></div>
+  <body>
+    <div class="page-wrapper">
+      <!--Header-->
+      <header class="site-header">
+        <h1>Are we shifting towards <em>renewable energy</em> sources?</h1>
+        <p class="subtitle">
+          A global perspective on energy transition - focus on Malaysia.
+        </p>
+      </header>
 
-  <!--<h1>The Shift towards Renewable Energy</h1>-->
-  <div id="line_chart2"></div>
+    <!--Section 1-->  
+    <section class="viz-section" id="section-global-map">
+      <div class="section-header">
+        <span class="section-label">Global</span>
+        <h2>Where is renewable energy adoption highest?</h2>
+      </div>
 
-  <h1>Fossil Fuel VS Renewable</h1>
-  <div id="area_chart3"></div>
+      <div class="chart-annotation">
+        <p>
+          Overview of globe's renewable energy comsumption. Darker shades of green indicates higher renewable penetration.
+        </p>
+      </div>
 
-  <h1>Higher Energy Usage leads to higher CO₂ Emissions</h1>
-  <div id="scatterplot1"></div>
+      <div class="chart-container full-layout">
+        <div id="choropleth_map1"></div>
+      </div>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE" target=_blank>Energy Use</a></p>
+    </section>
 
-  <h1>Population Impact on Emissions</h1>
-  <div id="bubble_chart1"></div>
+    <hr class="viz-divider">
 
-  <h1>ASEAN COUNTRIES</h1>
-  <div id="choropleth_map2"></div>
+    <!--Section 2-->
+    <section class="viz-section" id="section-dependence">
+      <div class="section-header">
+        <span class="section-label">Trend</span>
+        <h2>Global energy dependence on fossil fuels over time</h2>
+      </div>
 
-  <h1>Malaysia's Energy Composition</h1>
-  <div id="stacked_area_1"></div>
+        <div class="chart-container full-layout">
+          <div id="line_chart1"></div>
+        </div>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS" target=_blank>renewable_energy</a></p>
+    </section>
 
-  <h1>Malaysia Vs World</h1>
-  <div id="dual_line1"></div>
+    <hr class="viz-divider">
 
-  https://ourworldindata.org/profile/energy/malaysia 
+    <!--Section 3-->
+    <section class="viz-section" id="section-shift">
+      <div class="section-header">
+        <span class="section-label">Trend</span>
+        <h2>The shift towards renewable energy sources</h2>
+      </div>
+
+      <div class="chart-annotation">
+        <p>
+          <span class="note-balel">  Observation: </span>
+          There is a steady increase of renewable energy consumption
+        </p>
+      </div>
+
+      <div class="chart-container full-layout">
+        <div id="line_chart2"></div>
+      </div>
+      <p class="data-source">Source: Our World in Data <a href="https://ourworldindata.org/grapher/global-fossil-fuel-consumption" target=_blank>Fossil Fuel</a></p>
+      <p class="data-source">Source: Our World in Data <a href="https://ourworldindata.org/grapher/renewable-energy-consumption" target=_blank>Fossil Fuel</a></p>
+    </section>
+
+    <hr class="viz-divider">
+
+    <!--Secion 4-->
+    <section class="viz-section" id="section-fossil-vs-renewable">
+      <div class="section-header">
+        <span class="section-label">Composition</span>
+        <h2>Fossil fuel vs. renewable energy - a shifting balance</h2>
+      </div>
+
+      <div class="key-insight">
+        <div class="insight-icon">❗️</div>
+        <p>
+          Fossil fuel is still dominating the composition
+        </p>
+      </div>
+
+      <div class="chart-container full-layout">
+        <div id="area_chart3"></div>
+      </div>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS" target=_blank>renewable_energy</a></p>
+    </section>
+
+    <hr class="viz-divider">
+
+    <!--Section 5-->
+    <section class="viz-section" id="section-co2">
+      <div class="section-header">
+        <span class="section-label">Correlation</span>
+        <h2>Higher energy usage is linked to higher CO2 emissions</h2>
+      </div>
+
+      <div class="key-insight">
+        <div class="insight-icon">❗️</div>
+        <p>
+          Countries that are advanced/high-income have higher CO2 Emissions
+        </p>
+      </div>
+
+        <div class="chart-container">
+          <div id="scatterplot1"></div>
+        </div>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS" target=_blank>renewable_energy</a></p>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EN.GHG.CO2.PC.CE.AR5" target=_blank>co2</a></p>
+    </section>
+
+    <hr class="viz-divider">
+
+    <!--Secion 6-->
+    <section class="viz-section" id="section-population">
+      <div class="section-header">
+        <span class="section-label">Scale</span>
+        <h2>How population size shapes total emissions</h2>
+      </div>
+
+      <div class="chart-annotation">
+        <p>
+          <span class="note-label">Observation</span>
+          CO2 Emissions & Energy usage has a direct proportional relationship with Population
+        </p>
+      </div>
+
+      <div class="chart-container full-layout">
+        <div id="bubble_chart1"></div>
+      </div>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS" target=_blank>renewable_energy</a></p>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EN.GHG.CO2.PC.CE.AR5" target=_blank>co2</a></p>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/SP.POP.TOTL" target=_blank>population</a></p>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE" target=_blank>Energy Use</a></p>    
+    </section>
+
+    <hr class="viz-divider">
+
+    <!--Section 7-->
+    <section class="viz-section" id="section-asean">
+      <div class="section-header">
+        <span class="section-label">Regional</span>
+        <h2>Renewable energy across ASEAN countries</h2>
+      </div>
+
+      <div class="key-insight">
+        <div class="insight-icon">🌎</div>
+        <p>
+          <strong>Regional context:</strong>
+          Most countries in ASEAN are not developed or still developing to adopt renewable energy
+        </p>
+      </div>
+
+      <div class="chart-container full-layout">
+        <div id="choropleth_map2"></div>
+      </div>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS" target=_blank>renewable_energy</a></p>
+    </section>
+
+    <hr class="viz-divider">
+
+    <!--Secion 8-->
+    <section class="viz-section" id="section-malaysia-composition">
+      <div class="section-header">
+        <span class="section-label">Malaysia</span>
+        <h2>Malaysia's energy mix over time</h2>
+      </div>
+
+      <div class="key-insight">
+        <div class="insight-icon">🌎</div>
+        <p>
+          <strong>Regional context:</strong>
+          Oil and Gas dominates in Malaysia whilst Wind is not adapted yet
+        </p>
+      </div>
+
+        <div class="chart-container full-layout">
+          <div id="stacked_area_1"></div>
+        </div>
+      <p class="data-source">Source: Our World in Data <a href="https://ourworldindata.org/grapher/renewable-energy-consumption" target=_blank>Composition</a></p>
+    </section>
+
+    <hr class="viz-divider">
+
+    <!--Section 9-->
+    <section class="viz-section" id="section-malaysia-vs-world">
+      <div class="section-header">
+        <span class="section-label">Comparison</span>
+        <h2>Malaysia vs. the World - how does it compare</h2>
+      </div>
+
+      <div class="chart-annotation">
+        <p>
+          <span class="note-balel">Observation</span>
+          Malaysia is below the average but steadily keeping up
+        </p>
+      </div>
+
+      <div class="chart-container full-layout">
+        <div id="dual_line1"></div>
+      </div>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS" target=_blank>renewable_energy</a></p>
+    </section>
+
+    <hr class="viz-divider">
+
+    <!--Section 10-->
+    <section class="viz-section" id="section-asean">
+      <div class="section-header">
+        <span class="section-label">Regional</span>
+        <h2>Renewable energy across ASEAN countries</h2>
+      </div>
+
+      <div class="key-insight">
+        <div class="insight-icon">📈</div>
+        <p>
+          <strong>What to look for:</strong>
+          Malaysia's trend to improve efficiency
+        </p>
+      </div>
+
+      <div class="chart-container full-layout">
+        <div id="scatterplot_2"></div>
+      </div>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EN.GHG.CO2.PC.CE.AR5" target=_blank>co2</a></p>
+      <p class="data-source">Source: Our World in Data <a href="https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE" target=_blank>Energy Use</a></p>  
+    </section>
+
+  </div>
+    https://ourworldindata.org/profile/energy/malaysia 
 </body>
 </html>
